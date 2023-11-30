@@ -73,7 +73,7 @@ To set up the entire environment, the first step involves designing the topology
 
 ### Setting Up Topology Diagram:
 
-<img src="https://lh7-us.googleusercontent.com/YF83BAlpvMgO4F_dK1ec16DWkC8RFd-JG9K9Hzyg0bur4Q3qTW8cnztkuQDc319UPFDLSmIhcmxtdKo_ZaiNlAMg_6vL1YWUUCNxmqnNEEX2v4SmAEeC-FyQMyFZ-KJKAjeKEntLjLihx3g9LXpeF1HgFt5G7Dxl3xiEtfJmjJqauZkMcRRgMrIKI9ZGQeKakm0xmd5-Mg" style="width:3.5in;height:2in" />
+<img src="https://lh7-us.googleusercontent.com/YF83BAlpvMgO4F_dK1ec16DWkC8RFd-JG9K9Hzyg0bur4Q3qTW8cnztkuQDc319UPFDLSmIhcmxtdKo_ZaiNlAMg_6vL1YWUUCNxmqnNEEX2v4SmAEeC-FyQMyFZ-KJKAjeKEntLjLihx3g9LXpeF1HgFt5G7Dxl3xiEtfJmjJqauZkMcRRgMrIKI9ZGQeKakm0xmd5-Mg" style="width:4in;height:3.5in" />
 
 The topology consists of virtual switches, including VMnet8, VMnet11, and VMnet12, each assigned to specific interfaces. 
 
