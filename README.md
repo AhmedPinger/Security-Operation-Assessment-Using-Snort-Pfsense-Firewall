@@ -135,6 +135,10 @@ sudo nano /etc/apache2/sites-available/000-default.conf
   Require valid-user
 </Directory>
 ```
+
+<img src="https://lh7-us.googleusercontent.com/4eT7T9Esl0pOPNxtx9j_cAKhlCyPYduPVwmUxnpwjAN2BoWCgeQrLLpYGPvWRk6rxn1InyxTYMbcsgVGrtluj8QzUUJZh3jrRFKG6gK-0xLREUPeD4B_T75P99hmQ_NKXEspXi7uu5URwgRBOMWPKaT1LI_yJXF6yKssH9Cpe8YG9gvPxysQkJUKmsreJ7T_Gxqao9grCQ" style="width:6.5in;height:3.59722in" />
+
+
 ### Restart Apache
 ```bash
 sudo service apache2 restart
@@ -172,8 +176,6 @@ AuthName "Restricted Access"
 AuthUserFile /etc/nginx/.htpasswd
 Require valid-user
 ```
-<img src="https://lh7-us.googleusercontent.com/4eT7T9Esl0pOPNxtx9j_cAKhlCyPYduPVwmUxnpwjAN2BoWCgeQrLLpYGPvWRk6rxn1InyxTYMbcsgVGrtluj8QzUUJZh3jrRFKG6gK-0xLREUPeD4B_T75P99hmQ_NKXEspXi7uu5URwgRBOMWPKaT1LI_yJXF6yKssH9Cpe8YG9gvPxysQkJUKmsreJ7T_Gxqao9grCQ" style="width:6.5in;height:3.59722in" />
-
 # Restart Apache
 sudo service apache2 restart
 
