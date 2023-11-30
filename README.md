@@ -89,16 +89,14 @@ The topology consists of virtual switches, including VMnet8, VMnet11, and VMnet1
 2. Create VMnet11 and set it up to Host-only mode with IP address 192.168.40.0
 3. Create VMnet12 and set it up to Host-only mode with IP address 192.168.50.0
 
-## Development
-
-## Development
+### Development
 
 ### 1. Setup and Configure Web Server
 
 Install LAMP and WordPress, apply HTTP-Basic authentication on admin directories, and make admin directories password-protected.
 
-```bash
 # Installing LAMP
+```bash
 sudo apt install apache2 apache2-utils
 sudo service apache2 start
 sudo service apache2 enable
@@ -107,18 +105,22 @@ sudo apt install mariadb
 
 sudo apt install php
 sudo apt install phpmyadmin
-
-# Installing WordPress
+```
+### Installing WordPress
+```bash
 sudo apt install php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip
 
 wget https://wordpress.org/latest.tar.gz
 tar -zxvf latest.tar.gz
 sudo mv wordpress /var/www/html/
 ```
-# Configuring Apache
+### Configuring Apache
+```bash
 sudo nano /etc/apache2/sites-available/000-default.conf
+```
 
-# Add the following within the <VirtualHost> section:
+### Add the following within the <VirtualHost> section:
+```plaintext
 <Directory "/var/www/html/admin">
   AuthType Basic
   AuthName "admin area"
@@ -132,34 +134,44 @@ sudo nano /etc/apache2/sites-available/000-default.conf
   AuthUserFile /etc/nginx/.htpasswd
   Require valid-user
 </Directory>
-
-# Restart Apache
+```
+### Restart Apache
+```bash
 sudo service apache2 restart
+```
 
-# Configuring MariaDB
+### Configuring MariaDB
+```bash
 sudo mysql_secure_installation
+```
 
 # Create a MariaDB database and user for WordPress
+```bash
 sudo mysql -u root -p
 CREATE DATABASE wordpress;
 GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressuser'@'localhost' IDENTIFIED BY 'password';
 FLUSH PRIVILEGES;
 EXIT;
-
-# Access the WordPress installation page
+```
+### Access the WordPress installation page
+```bash
 http://localhost/wordpress
+```
 
-# Make Admin Directories Password Protected
+### Make Admin Directories Password Protected
+```bash
 sudo apt install nginx
 sudo htpasswd -c /etc/nginx/.htpasswd USERNAME
 sudo nano /etc/apache2/sites-available/000-default.conf
+```
 
-# Add the following within the <Directory> sections for admin areas:
+### Add the following within the <Directory> sections for admin areas:
+```plaintext
 AuthType Basic
 AuthName "Restricted Access"
 AuthUserFile /etc/nginx/.htpasswd
 Require valid-user
-
+```
 <img src="https://lh7-us.googleusercontent.com/4eT7T9Esl0pOPNxtx9j_cAKhlCyPYduPVwmUxnpwjAN2BoWCgeQrLLpYGPvWRk6rxn1InyxTYMbcsgVGrtluj8QzUUJZh3jrRFKG6gK-0xLREUPeD4B_T75P99hmQ_NKXEspXi7uu5URwgRBOMWPKaT1LI_yJXF6yKssH9Cpe8YG9gvPxysQkJUKmsreJ7T_Gxqao9grCQ" style="width:6.5in;height:3.59722in" />
 
 # Restart Apache
@@ -181,7 +193,6 @@ Assign interfaces, configure WAN, LAN, and DMZ interfaces, assign IP addresses, 
 
 Install Snort on Pfsense through the web portal, configure interfaces, and add custom rules for Brute Force and LFI attacks.
 
-```plaintext
 #### Installing Snort on Pfsense:
 
 1. Open the Pfsense web portal.
@@ -199,11 +210,11 @@ Install Snort on Pfsense through the web portal, configure interfaces, and add c
 Create custom Snort rules to detect and mitigate specific attacks. For example:
 
 - **Brute Force Attack Rule:**
-  ```plaintext
+```plaintext
   alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"SERVER-WEBAPP Site Editor WordPress plugin local file access attempt"; flow:to_server,established; content:"/ajax_shortcode_pattern.php?"; fast_pattern:only; http_uri; content:"ajax_path="; nocase; http_uri; metadata:policy max-detect-ips drop, service http; reference:cve,2018-7422; classtype:web-application-attack; sid:47424; rev:1;)
-
+```
 - **LFI Attack Rule:**
-  ```plaintext
+```plaintext
   alert tcp any any -> 192.168.40.200 80 (msg:"HTTP AUTH brute force attack"; content:"535 Authentication failed."; nocase; classtype:attempted-user; threshold:type threshold, track by_src, count 2, seconds 60; sid:1000500; rev:6;)
 ```
 ## Testing
@@ -223,6 +234,7 @@ Launch an LFI attack on the web server; check Snort alerts on Pfsense.
 - **Payload:**
   ```plaintext
   http://192.168.40.200/wordpress/wp-content/plugins/site-editor /editor/extensions/pagebuilder/includes/ajax_shortcode_pattern.php?ajax_ path=/etc/passwd
+  ```
 
 
 ## Acronyms
